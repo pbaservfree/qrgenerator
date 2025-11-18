@@ -59,13 +59,13 @@
                     <!-- URL/Teks (Default) -->
                     <div id="tab-url" class="tab-pane">
                         <label for="qr-text" class="block text-sm font-medium text-gray-600">URL atau Teks</label>
-                        <input type="text" id="qr-text" class="form-input" placeholder="https://partnerbisnis.com">
+                        <input type="text" id="qr-text" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="https://partnerbisnis.com">
                     </div>
                     <!-- Wi-Fi -->
                     <div id="tab-wifi" class="tab-pane hidden space-y-3">
-                        <input type="text" id="wifi-ssid" class="form-input" placeholder="Nama Jaringan (SSID)">
-                        <input type="password" id="wifi-pass" class="form-input" placeholder="Password Jaringan">
-                        <select id="wifi-type" class="form-input">
+                        <input type="text" id="wifi-ssid" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Nama Jaringan (SSID)">
+                        <input type="password" id="wifi-pass" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Password Jaringan">
+                        <select id="wifi-type" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                             <option value="WPA">WPA/WPA2</option>
                             <option value="WEP">WEP</option>
                             <option value="nopass">Tanpa Password</option>
@@ -73,16 +73,16 @@
                     </div>
                     <!-- vCard (Kontak) -->
                     <div id="tab-vcard" class="tab-pane hidden space-y-3">
-                        <input type="text" id="vcard-name" class="form-input" placeholder="Nama Lengkap">
-                        <input type="text" id="vcard-phone" class="form-input" placeholder="Nomor Telepon (cth: +62812...)">
-                        <input type="email" id="vcard-email" class="form-input" placeholder="Email">
-                        <input type="text" id="vcard-org" class="form-input" placeholder="Perusahaan (Opsional)">
+                        <input type="text" id="vcard-name" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Nama Lengkap">
+                        <input type="text" id="vcard-phone" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Nomor Telepon (cth: +62812...)">
+                        <input type="email" id="vcard-email" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Email">
+                        <input type="text" id="vcard-org" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Perusahaan (Opsional)">
                     </div>
                     <!-- Email -->
                     <div id="tab-email" class="tab-pane hidden space-y-3">
-                        <input type="email" id="email-to" class="form-input" placeholder="Email Tujuan">
-                        <input type="text" id="email-subject" class="form-input" placeholder="Subjek Email">
-                        <textarea id="email-body" class="form-input h-24 resize-none" placeholder="Isi Pesan (Opsional)"></textarea>
+                        <input type="email" id="email-to" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Email Tujuan">
+                        <input type="text" id="email-subject" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Subjek Email">
+                        <textarea id="email-body" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition h-24 resize-none" placeholder="Isi Pesan (Opsional)"></textarea>
                     </div>
                 </div>
                 
@@ -93,17 +93,17 @@
                         <!-- Warna Titik -->
                         <div>
                             <label for="color-dots" class="block text-sm font-medium text-gray-600">Warna QR</label>
-                            <input type="color" id="color-dots" class="form-color" value="#000000">
+                            <input type="color" id="color-dots" class="w-full h-10 p-1 border border-gray-300 rounded-xl cursor-pointer" value="#000000">
                         </div>
                         <!-- Warna Latar -->
                         <div>
                             <label for="color-bg" class="block text-sm font-medium text-gray-600">Warna Latar</label>
-                            <input type="color" id="color-bg" class="form-color" value="#ffffff">
+                            <input type="color" id="color-bg" class="w-full h-10 p-1 border border-gray-300 rounded-xl cursor-pointer" value="#ffffff">
                         </div>
                         <!-- Gaya Titik -->
                         <div class="col-span-2">
                             <label for="dot-style" class="block text-sm font-medium text-gray-600">Gaya Titik</label>
-                            <select id="dot-style" class="form-input">
+                            <select id="dot-style" class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                                 <option value="square">Kotak (Square)</option>
                                 <option value="dots">Titik (Dots)</option>
                                 <option value="rounded">Bulat (Rounded)</option>
@@ -136,9 +136,9 @@
                 <div class="mt-6 w-full max-w-xs">
                     <p class="text-sm font-semibold text-gray-700 mb-2 text-center">Unduh Hasil:</p>
                     <div class="flex gap-3">
-                        <button id="download-png" class="download-btn w-1/3 bg-gray-800 text-white">PNG</button>
-                        <button id="download-jpg" class="download-btn w-1/3 bg-gray-800 text-white">JPG</button>
-                        <button id="download-svg" class="download-btn w-1/3 bg-gray-800 text-white">SVG</button>
+                        <button id="download-png" class="w-1/3 bg-gray-800 text-white py-2 px-4 rounded-xl font-semibold hover:bg-gray-700 transition duration-200 text-sm">PNG</button>
+                        <button id="download-jpg" class="w-1/3 bg-gray-800 text-white py-2 px-4 rounded-xl font-semibold hover:bg-gray-700 transition duration-200 text-sm">JPG</button>
+                        <button id="download-svg" class="w-1/3 bg-gray-800 text-white py-2 px-4 rounded-xl font-semibold hover:bg-gray-700 transition duration-200 text-sm">SVG</button>
                     </div>
                 </div>
             </div> <!-- Akhir Kolom 2 -->
@@ -153,22 +153,16 @@
 
     <!-- 
       PERBAIKAN: 
-      1. Memindahkan library script dari <head> ke sini.
-      2. Library ini akan dimuat SEBELUM blok script di bawahnya.
+      1. Mengganti link CDN 'gh' (GitHub) yang tidak stabil dengan
+         link CDN 'npm' (Node Package Manager) yang resmi dan stabil.
+      2. Ini akan memperbaiki error 'QRCodeStyling is not defined'.
     -->
-    <script src="https://cdn.jsdelivr.net/gh/ko-sip/qr-code-styling@latest/lib/qr-code-styling.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@latest/lib/qr-code-styling.js"></script>
 
     <script>
-        // CSS Utility Classes (untuk JS)
-        const inputClass = "w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition";
-        const colorInputClass = "w-full h-10 p-1 border border-gray-300 rounded-xl cursor-pointer";
-        const downloadBtnClass = "py-2 px-4 rounded-xl font-semibold hover:bg-gray-700 transition duration-200 text-sm";
+        // PERBAIKAN: Menghapus blok 'CSS Utility Classes (untuk JS)'.
+        // Semua kelas styling sekarang ada langsung di HTML.
         
-        document.querySelectorAll('.form-input').forEach(el => el.classList.add(...inputClass.split(' ')));
-        document.querySelectorAll('.form-color').forEach(el => el.classList.add(...colorInputClass.split(' ')));
-        document.querySelectorAll('.download-btn').forEach(el => el.classList.add(...downloadBtnClass.split(' ')));
-
-
         /*
          * PERBAIKAN: 
          * Menghapus wrapper 'window.onload'.
