@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced QR Code Generator - partnerbisnis</title>
+    <!-- Memuat Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Google Font (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Library QR Code Styling DIPINDAHKAN dari sini ke akhir body -->
+    
+    <style>
+        /* Mengatur font default ke Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Latar belakang abu-abu muda */
+        }
+        /* Style untuk tab aktif */
+        .tab-btn.active {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: #ffffff; /* text-white */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 py-12">
+
+    <!-- Kontainer Utama -->
+    <div class="max-w-5xl w-full bg-white rounded-2xl shadow-xl p-8 md:p-10">
+        
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Advanced QR Code Generator</h1>
+            <p class="text-gray-500 mt-2">Buat, kustomisasi, dan unduh QR code Anda secara instan.</p>
+        </header>
+        
+        <!-- Konten Utama: Kontrol dan Hasil -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            
+            <!-- Kolom 1: Panel Kontrol -->
+            <div class="space-y-6">
+                
+                <!-- 1. Tipe Data (Tabs) -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-3">1. Pilih Tipe Konten</h2>
+                    <div class="flex bg-gray-100 rounded-xl p-1">
+                        <button class="tab-btn active w-1/4 py-2 px-1 rounded-lg text-sm font-medium transition" data-tab="url">URL/Teks</button>
+                        <button class="tab-btn w-1/4 py-2 px-1 rounded-lg text-sm font-medium transition" data-tab="wifi">Wi-Fi</button>
+                        <button class="tab-btn w-1/4 py-2 px-1 rounded-lg text-sm font-medium transition" data-tab="vcard">Kontak</button>
+                        <button class="tab-btn w-1/4 py-2 px-1 rounded-lg text-sm font-medium transition" data-tab="email">Email</button>
+                    </div>
+                </div>
+
+                <!-- Konten Tab -->
+                <div id="tab-content" class="space-y-3">
+                    <!-- URL/Teks (Default) -->
+                    <div id="tab-url" class="tab-pane">
+                        <label for="qr-text" class="block text-sm font-medium text-gray-600">URL atau Teks</label>
+                        <input type="text" id="qr-text" class="form-input" placeholder="https://partnerbisnis.com">
+                    </div>
+                    <!-- Wi-Fi -->
+                    <div id="tab-wifi" class="tab-pane hidden space-y-3">
+                        <input type="text" id="wifi-ssid" class="form-input" placeholder="Nama Jaringan (SSID)">
+                        <input type="password" id="wifi-pass" class="form-input" placeholder="Password Jaringan">
+                        <select id="wifi-type" class="form-input">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">Tanpa Password</option>
+                        </select>
+                    </div>
+                    <!-- vCard (Kontak) -->
+                    <div id="tab-vcard" class="tab-pane hidden space-y-3">
+                        <input type="text" id="vcard-name" class="form-input" placeholder="Nama Lengkap">
+                        <input type="text" id="vcard-phone" class="form-input" placeholder="Nomor Telepon (cth: +62812...)">
+                        <input type="email" id="vcard-email" class="form-input" placeholder="Email">
+                        <input type="text" id="vcard-org" class="form-input" placeholder="Perusahaan (Opsional)">
+                    </div>
+                    <!-- Email -->
+                    <div id="tab-email" class="tab-pane hidden space-y-3">
+                        <input type="email" id="email-to" class="form-input" placeholder="Email Tujuan">
+                        <input type="text" id="email-subject" class="form-input" placeholder="Subjek Email">
+                        <textarea id="email-body" class="form-input h-24 resize-none" placeholder="Isi Pesan (Opsional)"></textarea>
+                    </div>
+                </div>
+                
+                <!-- 2. Kustomisasi Desain -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-3">2. Kustomisasi Desain</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Warna Titik -->
+                        <div>
+                            <label for="color-dots" class="block text-sm font-medium text-gray-600">Warna QR</label>
+                            <input type="color" id="color-dots" class="form-color" value="#000000">
+                        </div>
+                        <!-- Warna Latar -->
+                        <div>
+                            <label for="color-bg" class="block text-sm font-medium text-gray-600">Warna Latar</label>
+                            <input type="color" id="color-bg" class="form-color" value="#ffffff">
+                        </div>
+                        <!-- Gaya Titik -->
+                        <div class="col-span-2">
+                            <label for="dot-style" class="block text-sm font-medium text-gray-600">Gaya Titik</label>
+                            <select id="dot-style" class="form-input">
+                                <option value="square">Kotak (Square)</option>
+                                <option value="dots">Titik (Dots)</option>
+                                <option value="rounded">Bulat (Rounded)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Unggah Logo (dari JPG/PNG) -->
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-700 mb-3">3. Unggah Logo (Opsional)</h2>
+                    <input type="file" id="logo-upload" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" accept="image/png, image/jpeg">
+                </div>
+                
+                <!-- Tombol Generate -->
+                <button id="generate-btn" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:bg-blue-700 transition duration-300 text-lg">
+                    Generate QR Code
+                </button>
+
+            </div> <!-- Akhir Kolom 1 -->
+
+            <!-- Kolom 2: Hasil QR Code -->
+            <div class="flex flex-col items-center justify-center bg-gray-100 rounded-2xl p-6">
+                <!-- Kontainer Canvas QR Code -->
+                <div id="canvas-container" class="w-full max-w-xs h-auto shadow-md rounded-xl overflow-hidden">
+                    <!-- QR Code akan digambar di sini oleh JS -->
+                </div>
+                
+                <!-- Tombol Download -->
+                <div class="mt-6 w-full max-w-xs">
+                    <p class="text-sm font-semibold text-gray-700 mb-2 text-center">Unduh Hasil:</p>
+                    <div class="flex gap-3">
+                        <button id="download-png" class="download-btn w-1/3 bg-gray-800 text-white">PNG</button>
+                        <button id="download-jpg" class="download-btn w-1/3 bg-gray-800 text-white">JPG</button>
+                        <button id="download-svg" class="download-btn w-1/3 bg-gray-800 text-white">SVG</button>
+                    </div>
+                </div>
+            </div> <!-- Akhir Kolom 2 -->
+            
+        </div> <!-- Akhir Grid Utama -->
+
+        <!-- Footer Branding -->
+        <footer class="text-center text-xs text-gray-400 pt-8 border-t border-gray-100 mt-10">
+            Alat oleh <a href="#" class="text-blue-600 hover:underline">partnerbisnis</a>
+        </footer>
+    </div> <!-- Akhir Kontainer Utama -->
+
+    <!-- 
+      PERBAIKAN: 
+      1. Memindahkan library script dari <head> ke sini.
+      2. Library ini akan dimuat SEBELUM blok script di bawahnya.
+    -->
+    <script src="https://cdn.jsdelivr.net/gh/ko-sip/qr-code-styling@latest/lib/qr-code-styling.js"></script>
+
+    <script>
+        // CSS Utility Classes (untuk JS)
+        const inputClass = "w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition";
+        const colorInputClass = "w-full h-10 p-1 border border-gray-300 rounded-xl cursor-pointer";
+        const downloadBtnClass = "py-2 px-4 rounded-xl font-semibold hover:bg-gray-700 transition duration-200 text-sm";
+        
+        document.querySelectorAll('.form-input').forEach(el => el.classList.add(...inputClass.split(' ')));
+        document.querySelectorAll('.form-color').forEach(el => el.classList.add(...colorInputClass.split(' ')));
+        document.querySelectorAll('.download-btn').forEach(el => el.classList.add(...downloadBtnClass.split(' ')));
+
+
+        /*
+         * PERBAIKAN: 
+         * Menghapus wrapper 'window.onload'.
+         * Kode ini sekarang berjalan secara langsung, yang aman karena:
+         * 1. Script ini ada di akhir <body>, jadi semua elemen HTML (seperti 'canvas-container') sudah ada.
+         * 2. Library 'qr-code-styling.js' (di atas) dijamin sudah dimuat dan 'QRCodeStyling' sudah terdefinisi.
+         */
+        
+        const canvasContainer = document.getElementById('canvas-container');
+        const generateBtn = document.getElementById('generate-btn');
+        const tabs = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        const logoUpload = document.getElementById('logo-upload');
+        
+        // Tombol Download
+        const downloadPNG = document.getElementById('download-png');
+        const downloadJPG = document.getElementById('download-jpg');
+        const downloadSVG = document.getElementById('download-svg');
+        
+        // Variabel state
+        let activeTab = 'url';
+        let logoImage = null;
+
+        // Inisialisasi QR Code Styling
+        const qrCode = new QRCodeStyling({
+            width: 300,
+            height: 300,
+            data: "https://partnerbisnis.com",
+            image: logoImage,
+            dotsOptions: {
+                color: "#000000",
+                type: "square"
+            },
+            backgroundOptions: {
+                color: "#ffffff",
+            },
+            imageOptions: {
+                crossOrigin: "anonymous",
+                margin: 10
+            },
+            qrOptions: {
+                errorCorrectionLevel: 'H' // 'H' (High) penting untuk logo
+            }
+        });
+
+        // Langsung tampilkan QR default
+        qrCode.append(canvasContainer);
+
+        // --- Fungsi untuk Meng-handle Generasi QR ---
+        
+        function updateQRCode() {
+            // 1. Dapatkan data dari tab aktif
+            let data = "";
+            switch (activeTab) {
+                case 'url':
+                    data = document.getElementById('qr-text').value || "https://partnerbisnis.com";
+                    break;
+                case 'wifi':
+                    const ssid = document.getElementById('wifi-ssid').value;
+                    const pass = document.getElementById('wifi-pass').value;
+                    const type = document.getElementById('wifi-type').value;
+                    data = `WIFI:T:${type};S:${ssid};P:${pass};;`;
+                    break;
+                case 'vcard':
+                    const name = document.getElementById('vcard-name').value;
+                    const phone = document.getElementById('vcard-phone').value;
+                    const email = document.getElementById('vcard-email').value;
+                    const org = document.getElementById('vcard-org').value;
+                    data = `BEGIN:VCARD\nVERSION:3.0\nN:${name}\nTEL:${phone}\nEMAIL:${email}\nORG:${org}\nEND:VCARD`;
+                    break;
+                case 'email':
+                    const to = document.getElementById('email-to').value;
+                    const subject = document.getElementById('email-subject').value;
+                    const body = document.getElementById('email-body').value;
+                    data = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    break;
+            }
+            
+            // 2. Dapatkan opsi kustomisasi
+            const dotsColor = document.getElementById('color-dots').value;
+            const bgColor = document.getElementById('color-bg').value;
+            const dotStyle = document.getElementById('dot-style').value;
+            
+            // 3. Update QR Code
+            qrCode.update({
+                data: data,
+                image: logoImage,
+                dotsOptions: {
+                    color: dotsColor,
+                    type: dotStyle
+                },
+                backgroundOptions: {
+                    color: bgColor
+                }
+            });
+        }
+
+        // --- Event Listeners ---
+
+        // Listener tombol Generate
+        generateBtn.addEventListener('click', updateQRCode);
+
+        // Listener ganti Tab
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Ganti style tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                activeTab = tab.dataset.tab;
+                
+                // Tampilkan konten tab
+                tabPanes.forEach(pane => {
+                    if (pane.id === `tab-${activeTab}`) {
+                        pane.classList.remove('hidden');
+                    } else {
+                        pane.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Listener unggah Logo (JPG/PNG)
+        logoUpload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    logoImage = e.target.result; // Simpan sebagai data URL
+                    // Tampilkan pratinjau kecil jika perlu, atau langsung generate
+                    updateQRCode(); 
+                };
+                reader.readAsDataURL(file);
+            } else {
+                logoImage = null;
+                updateQRCode();
+            }
+        });
+
+        // Listener Tombol Download
+        downloadPNG.addEventListener('click', () => {
+            qrCode.download({ name: "qr-partnerbisnis", extension: "png" });
+        });
+        
+        downloadJPG.addEventListener('click', () => {
+            qrCode.download({ name: "qr-partnerbisnis", extension: "jpeg" });
+        });
+        
+        downloadSVG.addEventListener('click', () => {
+            qrCode.download({ name: "qr-partnerbisnis", extension: "svg" });
+        });
+
+    </script>
+
+</body>
+</html>
